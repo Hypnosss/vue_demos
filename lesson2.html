@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        .red{
+            background-color: red;
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <div id = "demos">
+        渲染文本到页面：<span v-text = "test1"></span><hr>
+        渲染HTML到页面：<span v-html = "test2"></span><hr>
+        动态绑定属性：<div :class = "test3"></div><hr>
+        绑定一个事件：<button @click = "doSomething()">button</button><hr>
+        过滤器：{{ test4 | filter1 }}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el:"#demos",
+            data:{
+                test1:"1test",
+                test2:"<h1>h1</h1>",
+                test3:"red",
+                test4:"Hello"
+            },
+            methods:{
+                doSomething: function(){
+                    alert("You clicked the button.");
+                }
+            },
+            filters:{
+                filter1:function(value){
+                    return value + " world!";
+                }
+            }
+        })
+    </script>
+</body>
+</html>
