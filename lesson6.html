@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="demos">
+        <input v-model="message" placeholder="edit me">
+        <p>Message is: {{ message }}</p>
+
+        <input type="radio" v-bind:checked="oneRadio">
+        <hr>
+        1:<input type="radio" name="like" v-model="checkName1" value="1">
+        2:<input type="radio" name="like" v-model="checkName1" value="2">
+        3:<input type="radio" name="like" v-model="checkName1" value="3">
+        <hr>
+        1:<input type="checkbox" v-model="checkName2" value="1">
+        2:<input type="checkbox" v-model="checkName2" value="2">
+        3:<input type="checkbox" v-model="checkName2" value="3">
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <script>
+        var demos = new Vue({
+            el: "#demos",
+            data: {
+                message: "",
+                oneRadio: true,
+                checkName1: 1,
+                checkName2: []
+            }
+        })
+    </script>
+</body>
+
+</html>
