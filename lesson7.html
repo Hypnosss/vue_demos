@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="demos">
+        left: {{ total }}
+        <child :msg="message" @change="totalChange"></child>
+        <xxx></xxx>
+        
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <script>
+        var demos = new Vue({
+            el: "#demos",
+            data: {
+                message: "父组件内容123134",
+                total: 2000,
+                bus: new Vue()
+            },
+            components: {
+                "child": {
+                    props: ["msg"],
+                    template: " <div>\
+                                    {{ msg }}\
+                                    <button @click='myIncrease'>total+1</button>\
+                                </div>\
+                                ",
+                    data: function(){
+                        return{ 
+                            childTotal: 2000,
+                            aaa: "child里的"
+                        };
+                    },
+                    methods: {
+                        myIncrease: function(){
+                            this.childTotal++;
+                            this.$emit("change", this.childTotal);
+                            this.$root.bus.$emit("myIncrease", this.aaa);
+                            console.log(this.childTotal, this.aaa);
+                        }
+                    }
+                },
+                "xxx": {
+                    template: "<div></div>",
+                    created: function(){
+                        this.$root.bus.$on("myIncrease", function(value){
+                            alert(value);
+                        })
+                    }
+                }
+            },
+            methods: {
+                totalChange: function(value){
+                    this.total = value;
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
